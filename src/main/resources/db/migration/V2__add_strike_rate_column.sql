@@ -1,0 +1,1 @@
+ALTER TABLE player ADD COLUMN strike_rate DOUBLE;
