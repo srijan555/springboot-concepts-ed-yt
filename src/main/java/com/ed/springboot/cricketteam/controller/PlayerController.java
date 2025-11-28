@@ -16,7 +16,7 @@ import java.util.List;
 
 @Slf4j
 @RestController
-@RequestMapping("/api/players")
+@RequestMapping("/api/cricketteam/players")
 @Tag(name = "Player Management", description = "APIs for managing cricket team players")
 public class PlayerController {
 

@@ -4,7 +4,7 @@ import com.ed.springboot.cricketteam.service.PlayerSalaryService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/salary")
+@RequestMapping("/api/cricketteam/salary")
 public class PlayerSalaryController {
     private final PlayerSalaryService playerSalaryService;
     public PlayerSalaryController(PlayerSalaryService playerSalaryService) {
