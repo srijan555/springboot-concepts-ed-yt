@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/scorer")
+@RequestMapping("/api/cricketteam/scorer")
 public class ScorerController {
 
     @PreAuthorize("hasRole('ROLE_SCORER','ROLE_ADMIN')")

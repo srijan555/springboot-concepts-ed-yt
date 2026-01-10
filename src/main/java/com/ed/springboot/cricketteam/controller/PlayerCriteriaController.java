@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/criteria")
+@RequestMapping("/api/cricketteam/criteria")
 public class PlayerCriteriaController {
 
     private final PlayerCriteriaService playerCriteriaService;

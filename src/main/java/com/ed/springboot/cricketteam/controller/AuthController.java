@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/api/auth")
+@RequestMapping("/api/cricketteam/auth")
 public class AuthController {
 
     private final AuthService authService;

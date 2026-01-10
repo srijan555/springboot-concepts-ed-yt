@@ -36,47 +36,49 @@ public class SecurityConfig {
         return config.getAuthenticationManager();
     }
 
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-
-        http
-                .csrf(csrf -> csrf.disable())
-                // Authorize requests
-                .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/oauth2/**")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/error")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
-                        .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
-                        .anyRequest().authenticated()
-                )
-                .oauth2Login(oauth -> oauth
-                        .defaultSuccessUrl("/api/players", true)
-                )
-                // Set session management to stateless
-                .sessionManagement(session -> session.sessionCreationPolicy(
-                        SessionCreationPolicy.IF_REQUIRED)
-                )
-                // Add JWT token filter
-                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
-
-        return http.build();
-    }
-
+    //OAUTH2 LOGIN CONFIGURATION
 //    @Bean
 //    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 //        http
-//                .csrf().disable()
+//                .csrf(csrf -> csrf.disable())
+//                // Authorize requests
 //                .authorizeHttpRequests(auth -> auth
-//                        .antMatchers("/api/auth/**",
-//                                "/v3/api-docs/**", "/swagger-ui/**",
-//                                "/swagger-ui.html","/api/auth/refresh").permitAll()
-//                        .antMatchers("/api/admin/**").hasRole("ADMIN")
-//                        .antMatchers("/api/scorer/**").hasAnyRole("SCORER","ADMIN")
-//                        .anyRequest().authenticated())
-//                .sessionManagement(session -> session
-//                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+//                        .requestMatchers(new AntPathRequestMatcher("/auth/**")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/oauth2/**")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/error")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/")).permitAll()
+//                        .requestMatchers(new AntPathRequestMatcher("/login")).permitAll()
+//                        .anyRequest().authenticated()
+//                )
+//                .oauth2Login(oauth -> oauth
+//                        .defaultSuccessUrl("/api/players", true)
+//                )
+//                // Set session management to stateless
+//                .sessionManagement(session -> session.sessionCreationPolicy(
+//                        SessionCreationPolicy.IF_REQUIRED)
+//                )
+//                // Add JWT token filter
 //                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+//
 //        return http.build();
 //    }
+
+    //JWT LOGIN CONFIGURATION
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http
+                .csrf().disable()
+                .authorizeHttpRequests(auth -> auth
+                        .antMatchers("/api/cricketteam/auth/**",
+                                "/api/cricketteam/test-circuit-breaker/**",
+                                "/v3/api-docs/**", "/swagger-ui/**",
+                                "/swagger-ui.html","/api/auth/refresh").permitAll()
+                        .antMatchers("/api/cricketteam/admin/**").hasRole("ADMIN")
+                        .antMatchers("/api/cricketteam/scorer/**").hasAnyRole("SCORER","ADMIN")
+                        .anyRequest().authenticated())
+                .sessionManagement(session -> session
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+        return http.build();
+    }
 }
